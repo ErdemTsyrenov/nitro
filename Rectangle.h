@@ -96,7 +96,7 @@ class RectangleIntersection {
   std::vector<uint32> rectangles;
 };
 
-std::vector<RectangleIntersection> GetAllIntersections(std::vector<Rectangle>& rects) {
+std::vector<RectangleIntersection> GetAllIntersections(const std::vector<Rectangle>& rects) {
   std::vector<RectangleIntersection> all_intersections;
   SubsetGenerator gen(rects.size());
   for (auto subset : gen.Gen()) {
