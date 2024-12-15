@@ -94,9 +94,30 @@ void test_all_intersections() {
   }
 }
 
+void test_parse_json() {
+  using json = nlohmann::json;
+  auto json_data = json::parse(R"({
+    "rects": [
+      {"x": 100, "y": 100, "w": 250, "h": 80 },
+      {"x": 120, "y": 200, "w": 250, "h": 150 },
+      {"x": 140, "y": 160, "w": 250, "h": 100 },
+      {"x": 160, "y": 140, "w": 350, "h": 190 }
+      ]
+    })"
+  );
+  std::vector<Rectangle> expected{
+    {100, 100, 250, 80},
+    {120, 200, 250, 150},
+    {140, 160, 250, 100},
+    {160, 140, 350, 190},
+  };
+  assert(expected == ParseJson(json_data));
+}
+
 int main() {
   test_subsets_gen();
   test_rectangle();
   test_all_intersections();
+  test_parse_json();
   std::cout << "Success!\n";
 }

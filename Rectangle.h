@@ -5,6 +5,7 @@
 #include <optional>
 #include <sstream>
 #include <iostream>
+#include "json.hpp"
 
 using uint32 = unsigned;
 
@@ -74,7 +75,7 @@ class RectangleIntersection {
     return intersection == other.intersection 
            && rectangles == other.rectangles;
   };
-  void Print() {
+  void Print() const {
     auto VecToStr = [] (const std::vector<uint32>& rects) {
       std::stringstream s;
       for (uint32 idx : rects) {
@@ -119,6 +120,21 @@ std::vector<RectangleIntersection> GetAllIntersections(const std::vector<Rectang
     }
   }
   return all_intersections;
+}
+
+std::vector<Rectangle> ParseJson(const nlohmann::json& json_data) {
+  // using json = nlohmann::json;
+  // std::ifstream f(json_path);
+  // json json_data = json::parse(f);
+  std::vector<Rectangle> rectangles;
+  for (auto rect : json_data["rects"]) {
+    uint32 x = rect["x"].template get<uint32>();
+    uint32 y = rect["y"].template get<uint32>();
+    uint32 w = rect["w"].template get<uint32>();
+    uint32 h = rect["h"].template get<uint32>();
+    rectangles.push_back({x, y, w, h});
+  }
+  return rectangles;
 }
 
 
