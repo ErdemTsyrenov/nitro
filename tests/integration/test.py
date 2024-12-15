@@ -3,7 +3,7 @@ import subprocess
 import os
 
 if __name__ == '__main__':
-    executable = os.path.join('..', '..', 'build', 'main')
+    executable = os.getenv('EXECUTABLE') 
     if platform.system() == 'Windows':
         executable += '.exe'
     run = subprocess.run([executable, 'test.json'], capture_output=True, text=True)
