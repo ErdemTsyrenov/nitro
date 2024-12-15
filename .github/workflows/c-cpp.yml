@@ -8,7 +8,7 @@ on:
 
 jobs:
   build-linux:
-    name: Build and Test Project on Linux
+    name: build-linux
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -16,13 +16,18 @@ jobs:
       run: |
         cmake -B build
         cmake --build build/ --config Debug
-    - name: tests
+    - name: unit-tests
       run: |
          cd build 
          ctest --verbose -C Debug
+    - name: integration-tests
+      run: |
+         cd tests/integration 
+         python3 test.py
+
 
   build-windows:
-    name: Build and Test Project on Windows
+    name: build-windows
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v4
@@ -30,7 +35,11 @@ jobs:
       run: |
         cmake -B build
         cmake --build build/ --config Debug
-    - name: tests
+    - name: unit-tests
       run: |
          cd build 
          ctest --verbose -C Debug
+    - name: integration-tests
+      run: |
+         cd tests/integration 
+         python3 test.py
