@@ -126,13 +126,19 @@ std::vector<Rectangle> ParseJson(const nlohmann::json& json_data) {
   // using json = nlohmann::json;
   // std::ifstream f(json_path);
   // json json_data = json::parse(f);
+  const uint32 max_num_rect = 10;
   std::vector<Rectangle> rectangles;
+  uint32 i = 0;
   for (auto rect : json_data["rects"]) {
     uint32 x = rect.at("x").template get<uint32>();
     uint32 y = rect.at("y").template get<uint32>();
     uint32 w = rect.at("w").template get<uint32>();
     uint32 h = rect.at("h").template get<uint32>();
     rectangles.push_back({x, y, w, h});
+    i++;
+    if (i == max_num_rect) {
+      break;
+    }
   }
   return rectangles;
 }
