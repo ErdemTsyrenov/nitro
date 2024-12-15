@@ -92,6 +92,21 @@ void test_all_intersections() {
     };
     assert(expected == GetAllIntersections(rect));
   }
+  { // Test 10 rectangles to make sure it takes reasonable time
+    std::vector<Rectangle> rect{
+      {0, 0, 10, 10},
+      {0, 0, 10, 10},
+      {0, 0, 10, 10},
+      {0, 0, 10, 10},
+      {0, 0, 10, 10},
+      {0, 0, 10, 10},
+      {0, 0, 10, 10},
+      {0, 0, 10, 10},
+      {0, 0, 10, 10},
+      {0, 0, 10, 10}
+    };
+    GetAllIntersections(rect);
+  }
 }
 
 void test_parse_json() {
