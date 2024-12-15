@@ -10,8 +10,6 @@ jobs:
   build-linux:
     name: build-linux
     runs-on: ubuntu-latest
-    env:
-      EXECUTABLE: $GITHUB_WORKSPACE/build/main
     steps:
     - uses: actions/checkout@v4
     - name: build
@@ -31,8 +29,6 @@ jobs:
   build-windows:
     name: build-windows
     runs-on: windows-latest
-    env:
-      EXECUTABLE: $GITHUB_WORKSPACE\build\Debug\main.exe
     steps:
     - uses: actions/checkout@v4
     - name: build
